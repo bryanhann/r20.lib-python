@@ -1,0 +1,8 @@
+demo.A.B.C ==> ArgumentParser(prog='demo.A.B.C.__config.parser', usage=None, description=None, formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=False)
+
+demo.A.B ==> ArgumentParser(prog='demo.A.B.__config.parser', usage=None, description=None, formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=False)
+
+demo.A ==> ArgumentParser(prog='demo.A.__config.parser', usage=None, description=None, formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=False)
+
+demo ==> None
+

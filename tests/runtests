@@ -1,0 +1,1 @@
+py.test $1 ../lib/demo/A/B/C/__main__.py

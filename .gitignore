@@ -1,0 +1,10 @@
+.activate
+*.pyc
+__pycache__
+*cache
+tmp*
+*tmp
+.hide
+venv
+.venv
+hide
