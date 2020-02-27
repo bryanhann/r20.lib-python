@@ -1,1 +1,4 @@
-py.test $1 ../lib/demo/A/B/C/__main__.py
+# XXX This may have to be called with an absolute pathname
+ROOT=$(dirname $(dirname $0))
+SCRIPT=${ROOT}/lib/demo/A/B/C/__main__.py
+py.test ${SCRIPT}
