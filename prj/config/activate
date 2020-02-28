@@ -1,5 +1,6 @@
 mkdir -p          ${RXX}/__cache
 python3 -m venv   ${RXX}/__cache/venv
 source            ${RXX}/__cache/venv/bin/activate
-export PYTHONPATH=${RXX}/root/lib:$PYTHONPATH
+export PYTHONPATH=${RXX}/root/lib-bhtools:$PYTHONPATH
+export PYTHONPATH=${RXX}/root/lib-demo:$PYTHONPATH
 cp                ${RXX}/config/rxx.sh  ${HOME}/.local/bin/rxx
