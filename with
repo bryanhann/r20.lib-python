@@ -1,23 +1,33 @@
 pushd $0/.. > /tmp/foo
 export RXX=$PWD
+export CACHE=${RXX}/.c
+export VENV=${CACHE}/venv
 usage1="usage: $RXX/with [<OPTIONS>] cmd [<ARGS>]"
 usage2="use -h for more help"
 popd > /tmp/foo
 
+function pypath {
+    export PYTHONPATH=${PYTHONPATH}:$1
+}
 case .$1 in 
     .-h|.--help|.)
         echo
         echo $usage1
         echo
-        cat $RXX/config/USAGE
+        cat ${RXX}/config/USAGE
         exit
         ;;
-    .-c)
+    .--clear-cache)
         shift
         echo clearing cache
-        rm -rf $RXX/__cache 2> /tmp/foo
+        rm -rf ${CACHE} 2> /tmp/foo
         ;;
 esac
 
-source $RXX/config/activate
+pypath ${RXX}/lib/python3/r20_tools
+pypath ${RXX}/lib/python3/r20_tools_demo
+
+python3 -m venv ${VENV}
+source ${VENV}/bin/activate
+
 $*
