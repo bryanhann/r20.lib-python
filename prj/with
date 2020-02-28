@@ -9,7 +9,7 @@ case .$1 in
         echo
         echo $usage1
         echo
-        cat $RXX/USAGE
+        cat $RXX/config/USAGE
         exit
         ;;
     .-c)
