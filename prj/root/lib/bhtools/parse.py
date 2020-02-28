@@ -1,7 +1,7 @@
 import importlib 
 from collections import OrderedDict
 from argparse import ArgumentParser
-import bh.tools.func as func
+import bhtools.func as func
 
 def superparser(mip):
     parents = dictionize_mip(mip).values()

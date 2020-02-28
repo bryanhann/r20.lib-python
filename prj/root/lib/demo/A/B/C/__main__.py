@@ -1,4 +1,4 @@
-import bh.tools.parse as __P
+import bhtools.parse as __P
 
 PP=__P.superparser(__package__)
 DD=__P.dictionize_mip(__package__)
