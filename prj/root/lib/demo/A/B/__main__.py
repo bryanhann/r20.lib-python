@@ -1,4 +1,4 @@
-import bhtools.parse as __P
+import r20_tools.parse as __P
 if __name__=="__main__":
     opt = __P.superparser(__package__).parse_args()
     if opt.dump:
