@@ -1,0 +1,5 @@
+GET lib-python
+export PYTHONPATH=
+pypath $(LIB .         )/python3/r20_tools_demo 
+pypath $(LIB lib-python)/python3/r20_tools 
+

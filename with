@@ -1,33 +1,40 @@
-pushd $0/.. > /tmp/foo
-export RXX=$PWD
-export CACHE=${RXX}/.c
-export VENV=${CACHE}/venv
-usage1="usage: $RXX/with [<OPTIONS>] cmd [<ARGS>]"
-usage2="use -h for more help"
-popd > /tmp/foo
+pushd $0/.. > /tmp/foo ; export RXX=$PWD ; popd > /tmp/foo
 
-function pypath {
-    export PYTHONPATH=${PYTHONPATH}:$1
-}
-case .$1 in 
-    .-h|.--help|.)
-        echo
-        echo $usage1
-        echo
-        cat ${RXX}/config/USAGE
-        exit
-        ;;
-    .--clear-cache)
-        shift
-        echo clearing cache
-        rm -rf ${CACHE} 2> /tmp/foo
-        ;;
-esac
+export C=${RXX}/.cache          # cache
+export V=${RXX}/.cache/venv     # venv
+export R=${RXX}/.cache/r20      # repos
 
-pypath ${RXX}/lib/python3/r20_tools
-pypath ${RXX}/lib/python3/r20_tools_demo
+function clear_cache  { echo clearing cache ; rm -rf ${C} 2> /tmp/foo; }
+function clear_venv   { echo clearing venv  ; rm -rf ${V} 2> /tmp/foo; }
+function usage_long   { echo usage          ; cat ${RXX}/config/USAGE;  }
+function usage_short  { echo try -h ; }
+function copy_to_bin  { echo copying rxx    ; cp  ${RXX}/config/rxx.sh ${HOME}/.local/bin/rxx; }
 
-python3 -m venv ${VENV}
-source ${VENV}/bin/activate
+function pypath { export PYTHONPATH=${PYTHONPATH}:$1 ; }
+function LIB    { if [ "$1" == "." ]; then echo ${RXX}/lib ; else echo $(DST $1)/lib; fi ; }
+function DST    { echo ${C}/r20/$1; }
+function SRC    { echo https://github.com/bryanhann/r20.$1.git; }
+function GET    { if [ ! -d $(DST $1) ]; then git clone $(SRC $1) $(DST $1); fi ; }  
+function UNGET  { rm -rf ${C}/r20/$1; }
+
+while [ . == . ]; do
+    if [ "$1" == "-x" ]; then copy_to_bin ; shift ; continue ; fi
+    if [ "$1" == "-c" ]; then clear_cache ; shift ; continue ; fi
+    if [ "$1" == "-v" ]; then clear_venv  ; shift ; continue ; fi
+    if [ "$1" == "-h" ]; then usage_long  ; shift ; exit     ; fi
+    if [ "$1" == ""   ]; then usage_short ; shift ; break    ; fi
+    break
+done
+
+mkdir -p ${C}
+
+if [ ! -d ${V} ]; then 
+    python3 -m venv ${V}; 
+    source ${V}/bin/activate;  
+    pip install --upgrade pip; 
+fi
+    
+source ${V}/bin/activate
+source ${RXX}/config/activate
 
 $*
