@@ -1,0 +1,31 @@
+NAME
+     with -- run commands in a virtual environment
+
+SYNOPSIS
+     with [-hc] [cmd ...]
+        
+DESCRIPTION
+     Run [cmd ...] in a virtual environment
+
+
+OPTIONS:
+     -h         Display this help page
+     -c         Clear the cache first
+
+INTERNALS:
+     When called ./with will 
+
+     1) install a virtual environment
+     2) activate that virtual environment
+     3) reconfigure the PYTHONPATH environment varable
+     4) set the environment variable RXX to the containing folder
+     5) copy a script 'rxx' to ~/.local/bin
+     6) execute the cmd with it's arguments
+     7) exit
+
+     Configuration is determined in ./config/activate
+
+     The rxx script is used as a front end to ./bin and works
+     by simply calling '$RXX/bin/$*'. This is one reason why 
+     the RXX environment variable is set.
+

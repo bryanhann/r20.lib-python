@@ -1,0 +1,23 @@
+pushd $0/.. > /tmp/foo
+export RXX=$PWD
+usage1="usage: $RXX/with [<OPTIONS>] cmd [<ARGS>]"
+usage2="use -h for more help"
+popd > /tmp/foo
+
+case .$1 in 
+    .-h|.--help|.)
+        echo
+        echo $usage1
+        echo
+        cat $RXX/USAGE
+        exit
+        ;;
+    .-c)
+        shift
+        echo clearing cache
+        rm -rf $RXX/__cache 2> /tmp/foo
+        ;;
+esac
+
+source $RXX/config/activate
+$*

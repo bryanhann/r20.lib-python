@@ -1,0 +1,9 @@
+# XXX This may have to be called with an absolute pathname
+pip install -r $RXX/config/pip.freeze
+py.test $RXX/root/lib/demo/A/B/C/__main__.py
+#py.test $(dirname $0)/root/lib/demo/A/B/C/__main__.py
+#py.test ${SCRIPT}
+#ROOT=$(dirname $0)/root
+#SCRIPT=${ROOT}/lib/demo/A/B/C/__main__.py
+#py.test ${SCRIPT}
+
